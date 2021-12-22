@@ -168,11 +168,12 @@ class MikroNode {
                 challenge=>{
                     const md5=crypto.createHash('md5');
                     md5.update(Buffer.concat([Buffer.from(nullString+password),Buffer.from(challenge)]));
-                    stream.write([
-                        "/login",
-                        "=name="+user,
-                        "=response=00"+md5.digest("hex")
-                    ]);
+                    stream.write(["/login", "=name=" + user, "=password=" + password, "=response=00" + md5.digest("hex")]);
+//                     stream.write([
+//                         "/login",
+//                         "=name="+user,
+//                         "=response=00"+md5.digest("hex")
+//                     ]);
                 },{resolve,reject}
             );
             this.connection.setDebug(this.debug);
